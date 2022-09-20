@@ -44,6 +44,10 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
             return (T) new MainViewModel(
                     mainRepository
             );
-        }}
+
+        }
+        return null;
+    }
+
 }
 

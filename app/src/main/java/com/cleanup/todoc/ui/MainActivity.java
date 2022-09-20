@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cleanup.todoc.R;
+import com.cleanup.todoc.database.TodocDataBase;
 import com.cleanup.todoc.model.Project;
 import com.cleanup.todoc.model.Task;
 
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     /**
      * List of all projects available in the application
      */
-    private final Project[] allProjects = Project.getAllProjects();
+    private final Project[] allProjects = TodocDataBase.PROJECTS;
 
     /**
      * List of all current tasks of the application
@@ -137,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         }
 
 
-
+        updateTasks(lTasks);
         return super.onOptionsItemSelected(item);
     }
 
