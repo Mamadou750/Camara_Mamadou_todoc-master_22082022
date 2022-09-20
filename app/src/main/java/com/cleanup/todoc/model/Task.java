@@ -30,6 +30,10 @@ public class Task {
      */
     private long projectId;
 
+    public long getProjectId() {
+        return projectId;
+    }
+
     /**
      * The name of the task
      */
@@ -37,7 +41,9 @@ public class Task {
     @SuppressWarnings("NullableProblems")
     @NonNull
     private String name;
-
+    public long getCreationTimestamp() {
+        return creationTimestamp;
+    }
     /**
      * The timestamp when the task has been created
      */
@@ -90,10 +96,7 @@ public class Task {
      *
      * @return the project associated to the task
      */
-    @Nullable
-    public Project getProject() {
-        return Project.getProjectById(projectId);
-    }
+
 
     /**
      * Returns the name of the task.

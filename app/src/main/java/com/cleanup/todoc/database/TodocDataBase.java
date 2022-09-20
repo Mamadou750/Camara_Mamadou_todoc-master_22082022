@@ -22,10 +22,20 @@ import java.util.List;
 @Database(entities = {Task.class, Project.class}, version = 1, exportSchema = false)
 public abstract class TodocDataBase extends RoomDatabase {
 
-    public static final List<Project> PROJECTS = Arrays.asList(
-            new Project("Projet Tartampion", 0xFFEADAD1),
-            new Project("Projet Lucidia", 0xFFB4CDBA),
-            new Project("Projet Circus",0xFFA3CED2));
+    public static final Project[] PROJECTS = new Project[]{
+            new Project( 1L, "Projet Tartampion", 0xFFEADAD1),
+            new Project(2L ,"Projet Lucidia", 0xFFB4CDBA),
+            new Project(3L ,"Projet Circus", 0xFFA3CED2),
+    };
+
+
+    public static Project getProjectById(long id) {
+        for (Project project : PROJECTS) {
+            if (project.getId() == id)
+                return project;
+        }
+        return null;
+    }
 
     //SINGLETON
     private static volatile TodocDataBase INSTANCE;
@@ -42,6 +52,7 @@ public abstract class TodocDataBase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                                     TodocDataBase.class, "TodocDatabase.db")
                             .addCallback(populateDatabase())
+                            .allowMainThreadQueries()
                             .build();
                 }
             }
