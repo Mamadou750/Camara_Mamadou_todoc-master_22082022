@@ -242,7 +242,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
                 case RECENT_FIRST:
                     Collections.sort(lTasks, new Task.TaskRecentComparator());
                     break;
-                case OLD_FIRST:
+                default:
                     Collections.sort(lTasks, new Task.TaskOldComparator());
                     break;
 

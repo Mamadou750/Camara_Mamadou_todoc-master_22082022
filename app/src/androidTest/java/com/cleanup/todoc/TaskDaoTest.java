@@ -1,11 +1,14 @@
 package com.cleanup.todoc;
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.room.Room;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.cleanup.todoc.database.TodocDataBase;
 import com.cleanup.todoc.model.Project;
 import com.cleanup.todoc.model.Task;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.Before;
@@ -19,9 +22,9 @@ public class TaskDaoTest {
     private TodocDataBase mDataBase;
 
     //set data for test
-    private static long PROJECT_ID = 1;
-    private static Project PROJECT_DEMO = new Project("Project test",0xFFEADAD1);
-    private static Task TASK_DEMO = new Task(PROJECT_ID,"task test", new Date().getTime());
+    private static long PROJECT_ID = 1L;
+    private static Project PROJECT_DEMO = new Project(PROJECT_ID,"Project test",0xFFEADAD1);
+    private static Task TASK_DEMO = new Task(1L ,PROJECT_ID,"task test", new Date().getTime());
 
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
@@ -42,7 +45,7 @@ public class TaskDaoTest {
     @Test
     public void insertAndGetProject() throws InterruptedException {
         this.mDataBase.projectDAO().insertProject(PROJECT_DEMO);
-        Project project = LiveDataTestUtil.getValue(this.mDataBase.projectDAO().getProject(PROJECT_ID));
+        Project project = LiveDataTestUtils.LiveDataTestUtil.getValue(this.mDataBase.projectDAO().getProject(PROJECT_ID));
         assertTrue(project.getName().equals(PROJECT_DEMO.getName()) && project.getId() == PROJECT_ID);
     }
 
@@ -50,7 +53,7 @@ public class TaskDaoTest {
     public void insertAndGetTasks() throws InterruptedException {
         this.mDataBase.projectDAO().insertProject(PROJECT_DEMO);
         this.mDataBase.taskDAO().insertTask(TASK_DEMO);
-        List<Task> tasks = LiveDataTestUtil.getValue(this.mDataBase.taskDAO().getTasks(PROJECT_ID));
+        List<Task> tasks = LiveDataTestUtils.LiveDataTestUtil.getValue(this.mDataBase.taskDAO().getTasks(PROJECT_ID));
         assertTrue(tasks.size() == 1);
     }
 
@@ -72,11 +75,11 @@ public class TaskDaoTest {
         this.mDataBase.projectDAO().insertProject(PROJECT_DEMO);
         this.mDataBase.taskDAO().insertTask(TASK_DEMO);
 
-        List<Task> taskList = LiveDataTestUtil.getValue(this.mDataBase.taskDAO().getTasks(PROJECT_ID));
+        List<Task> taskList = LiveDataTestUtils.LiveDataTestUtil.getValue(this.mDataBase.taskDAO().getTasks(PROJECT_ID));
         assertTrue(taskList.size() == 1);
 
         this.mDataBase.taskDAO().deleteTask(taskList.get(0).getId());
-        List<Task> taskList1 = LiveDataTestUtil.getValue(this.mDataBase.taskDAO().getTasks(PROJECT_ID));
+        List<Task> taskList1 = LiveDataTestUtils.LiveDataTestUtil.getValue(this.mDataBase.taskDAO().getTasks(PROJECT_ID));
         assertTrue(taskList1.isEmpty());
     }
 }
