@@ -1,12 +1,6 @@
 package com.cleanup.todoc;
 
-import android.support.annotation.IdRes;
-import android.support.test.espresso.PerformException;
-import android.support.test.espresso.UiController;
-import android.support.test.espresso.ViewAction;
-import android.support.test.espresso.matcher.ViewMatchers;
-import android.support.test.espresso.util.HumanReadables;
-import android.support.v7.widget.RecyclerView;
+
 import android.view.View;
 
 import androidx.annotation.IdRes;
@@ -68,10 +62,6 @@ public class TestUtils {
         }
 
         @Override
-        public void perform(UiController uiController, View view) {
-
-        }
-
         public void perform(UiController uiController, View view) {
             RecyclerView recyclerView = (RecyclerView) view;
             (new ScrollToPositionViewAction(this.position)).perform(uiController, view);

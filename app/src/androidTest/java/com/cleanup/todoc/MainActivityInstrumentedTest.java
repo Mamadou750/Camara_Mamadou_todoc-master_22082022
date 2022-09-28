@@ -19,6 +19,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
 import com.cleanup.todoc.ui.MainActivity;
+import  com.cleanup.todoc.R;
 
 
 
@@ -69,6 +70,7 @@ public class MainActivityInstrumentedTest {
         onView(withId(R.id.txt_task_name)).perform(replaceText("hhh Tâche example"));
         onView(withId(android.R.id.button1)).perform(click());
 
+        // order of creation
         onView(withRecyclerView(R.id.list_tasks).atPositionOnView(0, R.id.lbl_task_name))
                 .check(matches(withText("aaa Tâche example")));
         onView(withRecyclerView(R.id.list_tasks).atPositionOnView(1, R.id.lbl_task_name))
