@@ -34,7 +34,7 @@ public class TaskUnitTest {
     public void test_az_comparator() {
         final Task task1 = new Task(1L, 1L,"aaa", 123);
         final Task task2 = new Task(2L, 2L,"zzz", 124);
-        final Task task3 = new Task(3, 3L,"hhh", 125);
+        final Task task3 = new Task(3L, 3L,"hhh", 125);
 
         final ArrayList<Task> tasks = new ArrayList<>();
         tasks.add(task1);
